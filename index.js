@@ -41,7 +41,7 @@
                 utm:['ls']
             },
             // server_url:'',
-            server_url: 'https://test-syg.datasink.sensorsdata.cn/sa?project=liangshuang&token=27f1e21b78daf376',
+            server_url: 'https://sdktest.datasink.sensorsdata.cn/sa?project=zhangzhankai&token=21f2e56df73988c7',
             // server_url: ['https://test-syg.datasink.sensorsdata.cn/sa?project=liangshuang&token=27f1e21b78daf376','https://test-syg.datasink.sensorsdata.cn/sa?project=lixiang&token=27f1e21b78daf376'],
             debug_mode: false, 
             debug_mode_upload:false,
