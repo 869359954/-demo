@@ -1,0 +1,446 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" href="#" />
+    <meta charset='UTF-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" >
+    <title>sdk demo ls </title>
+    <style>
+        #rel{
+            position: relative;
+        }
+        #rel button{
+            position: absolute;
+        }
+        *{
+            margin: 5px 5px;
+        }
+        button{
+            width: 70px;
+            height: 20px;
+            border: 1px solid grey;
+        }
+        input{
+            border: 1px solid grey;
+        }
+        #login,#iframewrapper,#setclick,#default{
+            border: 2px solid darkgray;
+            margin: 5px 0;
+            text-align: center;
+        }
+        .img{
+            height: 50px;
+            width: 100px;
+            display: block;
+            margin: 0 auto;
+        }
+        #stoppro{
+            width: 120px;
+            height: 20px;
+            text-align: center;
+            display:block;
+            margin: 5px auto;
+            
+        }
+        .iframe{
+            display: block;
+            margin: 5px auto;
+        }
+        #logoutbtn{
+            display: block;
+            width: 70px;
+            margin: 0 auto;
+            margin-bottom: 6px;
+            margin-top: 5px;
+        }
+        #decodeurl{
+            display: inline;
+            width:60px;
+        }
+        #text{
+            height: 200px;
+            width: 98%;
+            border: 1px solid grey;
+        }
+        .t{
+            display: none;
+        }
+        .active{
+            display: inline-block;
+        }
+        .scroll{
+            height: 3000px;
+            background: radial-gradient(grey,yellow,pink)
+        }
+        .scrollwra{
+            height: 100px;
+            border: 2px solid darkgray;
+            overflow-y: scroll;
+        }
+        .iframe{
+            /* height: 800px; */
+            background: radial-gradient(grey,yellow,pink)
+
+        }
+        #iframewrapper{
+            /* height: 200px; */
+            overflow-y: scroll;
+        }
+       textarea{
+        border: 2px solid darkgray;
+       }
+       .scrollwr{
+           height: 1000px;
+           border: 2px solid darkgray;
+       }
+
+       #default > * {
+           margin: 0;
+       }
+       #vi{
+           display: none;
+       }
+       #turnpage{
+           border: 1px solid grey;
+           margin-top: 10px;
+           display: inline-block;
+       }
+    </style>
+    <!-- <script src="https://upcdn.b0.upaiyun.com/libs/jquery/jquery-2.0.2.min.js"></script> -->
+    <!-- <script src="./require.js"></script> -->
+    
+<!-- amd 引入 -->
+    <!-- <script>
+        requirejs(["./sdk889/sa-sdk-javascript/sensorsdata.full.amd.js"], function(sensors) {
+            sensors.init({
+                server_url: 'https://test-syg.datasink.sensorsdata.cn/sa?project=liangshuang&token=27f1e21b78daf376',
+                heatmap:{
+                    clickmap: 'default',
+                    scroll_notice_map: 'not_collect'
+                }
+            });
+            sensors.quick('autoTrack');
+            console.log(99)
+        });
+    </script> -->
+<!-- 同步引入 -->
+    <!-- <script>
+            (function(para) {
+              if(typeof(window['sensorsDataAnalytic201505']) !== 'undefined') {
+                return false;
+              }
+              window['sensorsDataAnalytic201505'] = para.name;
+              window[para.name] = {
+                para: para
+              };
+          })({
+              name: 'sensors',
+              server_url:'https://test-syg.datasink.sensorsdata.cn/sa?project=liangshuang&token=27f1e21b78daf376',
+              //如果神策代码中 `sensorsdata.min.js` 是 1.13.1 以前的版本，必须须配置 heatmap_url，高于此版本不需要配置。heatmap_url 神策分析中点击分析及触达分析功能代码，代码生成工具会自动生成。
+              heatmap_url: "在 GitHub 下载新版本的 heatmap.min.js ",
+              //如果神策后台版本及 `sensorsdata.min.js` 均是 1.10 及以上版本，不需要配置 web_url 参数。web_url 神策分析中点击分析及触达分析功能会用到此地址，代码生成工具会自动生成。
+              web_url:"神策分析后台地址",
+              heatmap: {
+                 //是否开启点击图，默认 default 表示开启，自动采集 $WebClick 事件，可以设置 'not_collect' 表示关闭
+                 //需要 JSSDK 版本号大于 1.7
+                 clickmap:'default',
+                 //是否开启触达注意力图，设置 default 表示开启，自动采集 $WebStay 事件，设置 'not_collect' 表示关闭
+                 //需要 JSSDK 版本号大于 1.9.1
+                 scroll_notice_map:'not_collect'
+              }
+            });
+          </script>
+        <script src="./sdk889/sa-sdk-javascript/sensorsdata.full.js"></script>
+        <script>
+          sensors.quick('autoTrack');
+        </script> -->
+<!-- 异步引入 -->
+    <!-- <script>
+        (function(para) {
+            var p = para.sdk_url, n = para.name, w = window, d = document, s = 'script',x = null,y = null;
+            if(typeof(w['sensorsDataAnalytic201505']) !== 'undefined') {
+                return false;
+            }
+            w['sensorsDataAnalytic201505'] = n;//'sensors'
+            //[['track','autotrack'],['quick','autotrack']]
+            w[n] = w[n] || function(a) {return function() {(w[n]._q = w[n]._q || []).push([a, arguments]);}};
+            var ifs = ['track','quick','register','registerPage','registerOnce','trackSignup', 'trackAbtest', 'setProfile','setOnceProfile','appendProfile', 'incrementProfile', 'deleteProfile', 'unsetProfile', 'identify','login','logout','trackLink','clearAllRegister','getAppStatus'];
+            for (var i = 0; i < ifs.length; i++) {
+            w[n][ifs[i]] = w[n].call(null, ifs[i]);
+            }
+            if (!w[n]._t) {
+                x = d.createElement(s), y = d.getElementsByTagName(s)[0];
+                x.async = 1;
+                x.src = p;
+                x.setAttribute('charset','UTF-8');
+                w[n].para = para;
+                y.parentNode.insertBefore(x, y);
+            }
+        })({
+            sdk_url: './sdk889/sa-sdk-javascript/sensorsdata.full.js',
+            heatmap_url: './sdk883/heatmap.full.js',
+            // sdk_url: './sensors/sensorsdata.js',
+            // heatmap_url: './sensors/heatmap.js',
+            name: 'sensors',
+            source_channel:['bd_vid'],
+            source_type:{
+                utm:['ls']
+            },
+            // server_url:'',
+            server_url: 'https://test-syg.datasink.sensorsdata.cn/sa?project=liangshuang&token=27f1e21b78daf376',
+            // server_url: ['https://test-syg.datasink.sensorsdata.cn/sa?project=liangshuang&token=27f1e21b78daf376','https://test-syg.datasink.sensorsdata.cn/sa?project=lixiang&token=27f1e21b78daf376'],
+            debug_mode: false, 
+            debug_mode_upload:false,
+            // send_type:'ajax',
+            // use_app_track: true,
+            use_client_time: true,
+            cross_subdomain:false,
+            // batch_send:{
+            //     datasend_timeout: 6000,  //一次请求超过多少秒的话自动取消，防止请求无响应。
+            //     send_interval: 12000,    //间隔几秒发一次数据。
+            //     one_send_max_length: 6  //一次请求最大发送几条数据，防止数据太大
+            // },
+            is_track_single_page:false,
+            heatmap:{
+                // clickmap:'not_collect',
+                scroll_notice_map:'not_collect',
+                loadTimeout:  3000,
+                // collect_url: function(){
+                //     //如果只采集首页
+                //     if(location.href === 'http://www.ls.com:8080/index.html'){
+                //         return false;
+                //     }else{
+                //         return true;
+                //     }
+                // },
+                collect_element: function(element_target){
+                    // 如果这个元素有属性sensors-disable=true时候，不采集
+                    if(element_target.getAttribute('sensors-disable') === 'true'){
+                        return false;
+                    }else{
+                        return true;
+                    }
+                },
+                custom_property:function( element_target ){
+                    return{
+                        timepppp:new Date()
+                    }
+                },
+                collect_input:function(element_target){
+                    //例如如果元素的 id 是a，就采集这个元素里的内容
+                    if(element_target.id === 'loginid'){
+                        return true;
+                    }
+                },
+                // element_selector:'not_use_id',
+                renderRefreshTime:1000,
+                scroll_delay_time: 4000,
+                useCapture: false
+            }
+            });
+            sensors.quick('autoTrack');
+            sensors.setProfile({w:1})
+    </script> -->
+
+<!-- Copyright 2015-2017 GrowingIO, Inc. More info available at http://www.growingio.com -->
+
+<script type='text/javascript'>
+!function(e,t,n,g,i){e[i]=e[i]||function(){(e[i].q=e[i].q||[]).push(arguments)},n=t.createElement("script"),tag=t.getElementsByTagName("script")[0],n.async=1,n.src=('https:'==document.location.protocol?'https://':'http://')+g,tag.parentNode.insertBefore(n,tag)}(window,document,"script","assets.giocdn.com/2.1/gio.js","gio");
+  gio('init', 'a50dd4b8f210a44a', {});
+
+  gio('send');
+  
+</script>
+
+<!-- End GrowingIO Analytics code version: 2.1 -->
+    
+<script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?ea50e59197afd67cef94b5c114ab11c3";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+</script>
+        
+</head>
+<body>
+     <div>
+            <a href="#" id = 'tr'>
+                <button id='test'>123i</button>
+            </a>
+            <div id='default'>
+                    <button data='test' sensors-disable=true>disbtn</button>
+                    <button data='test' title="1234" id='goodbtn' class='ww'>button</button>
+                    <div>点击输入text：<input id='a' type="text">提交：<input type="submit"></div>
+                    <a href="http://www.ls.com:8080/indexdemo.html?" id='abtn'>跳转页面demo</a>
+                 </div>
+                 <div id='setclick'>
+                     <img class='img' src="./pic.jpeg" id='trackimg'>
+                     <button id='stoppro'>stopPropagation</button>
+                 </div>
+                 <div id='iframewrapper'>
+                     <h3>iframe indexdemo</h3>
+                     <!-- <iframe src="http://www.ls.com:8080/indexdemo.html?utm_source=1233demo" frameborder="0"></iframe> -->
+                 </div> 
+                 <div id="login">
+                     <input type="text"  sensors-disable = 'true' id='loginid'>
+                     <button id="loginbtn" sensors-disable = 'true'>login</button>
+                     <button id="logoutbtn" sensors-disable = 'true' >logout</button>
+                     <input type="text" id='sensorscookie' sensors-disable = 'true' >
+                     <button id='decodeurl' sensors-disable = 'true'>decode</button>
+                 </div> 
+                 <div id='text'>
+                     <div>
+                         <button class='p'>page 1</button>
+        
+                         <button class='p'>page 2</button>
+                         <button class='p'>page 3</button>
+                     </div>
+                     
+                     <div class='t active'>
+                         <button>
+                                im page1
+                         </button>
+                     </div>
+                     <div class='t'>
+                         <button>
+                            im page2
+                        </button>
+                    </div>
+                     <div class='t'>
+                            <button id = 'pbtn3'>
+                                    im page3
+                            </button>
+                     </div>
+                     <div>
+                            <div id='turnpage'>
+                                    turn to p3
+                                </div>
+                     </div>
+                     
+                 </div>
+                 
+                 <div class="scrollwra">
+                        <div class="scroll">...</div>
+                 </div>
+
+                 <div class="scrollwr"></div>
+                 <div>
+                        <div id='rel'>
+                                <button id="testbtn">test</button>
+                        </div>
+                 </div>
+                 <button id='vi'>
+                     5566
+                 </button>
+                 <!-- <div>
+                        <a href="">
+                                <button>test9999iiiii</button>
+                        </a>
+                 </div> -->
+                 
+
+     </div>
+     <script src='./index.js'></script>
+     <script>
+         sensors.quick('isReady',function(){
+             var pro = sensors.getPresetProperties()
+         console.log(pro,'pro-----')
+         })
+         var btnid = 1;
+         window.onscroll = function(){
+             var odiv = document.createElement('button');
+             odiv.innerHTML = btnid;
+             btnid ++;
+             document.body.appendChild(odiv);
+         }
+     </script>  
+     <script>
+        
+        //  document.addEventListener('click',function(e){
+        //      console.log(e.target);
+             
+        //  })
+         window.addEventListener('popstate',func,false);
+         function func(){
+             console.log('popstate---')
+         }
+        
+         
+         var pbtn = document.getElementsByClassName('p');
+         goodbtn.onclick = function(){
+             console.log(34)
+             goodbtn.classList.add('sdd');
+         }
+         var page = document.getElementsByClassName('t');
+         for(var i = 0;i<pbtn.length;i++){
+             (function pp(i){
+                pbtn[i].onclick = function(){
+                    for(var j = 0;j<pbtn.length;j++){
+                        page[j].classList.remove("active");
+                    }
+                    page[i].classList.add('active');
+                 }
+             })(i);
+            
+         }
+         var pagediv = document.getElementById('turnpage');
+         pagediv.onclick = function(){
+            for(var j = 0;j<pbtn.length;j++){
+                        page[j].classList.remove("active");
+                    }
+                    page[2].classList.add('active');
+         }
+        //  sensors.getPresetProperties();
+        //  sensors.quick('isReady',function(){
+        //     console.log(sensors.getPresetProperties())
+        //  })
+         var funcstore = {
+             decodeurlfunc : function(){
+                var cookie2015 = document.getElementById('sensorscookie');
+                var cookieval = "'" + cookie2015.value + "'";
+                console.log(decodeURIComponent(cookieval));
+                cookie2015.value = '';
+             },
+             loginfunc : function(){
+                var loginid = document.getElementById('loginid');
+                var val = loginid.value;
+                sensors.login(val);
+                loginid.value = '';
+             },
+             logoutfunc : function(){
+                 sensors.quick('autoTrack',{
+                     ss:'logout'
+                 });
+                sensors.logout();
+                console.log('logout');
+             }
+         }
+         decodeurl.onclick = function(){funcstore.decodeurlfunc();}
+         loginbtn.onclick = function(){funcstore.loginfunc();}
+         logoutbtn.onclick = function(){funcstore.logoutfunc();}
+         trackimg.onclick = function(){
+             sensors.quick('trackHeatMap',this,{
+                 platform:'trackheatmap'
+             },function(){
+                 console.log('trackheatmap');
+             })
+         }
+         stoppro.onclick = function(event){
+             event.stopPropagation();
+         }
+        abtn.onclick = function(){
+            sensors.track('n',{});
+            sensors.track('d',{});
+            sensors.track('r',{});
+        }
+        document.cookie = "ls=123;expires=‘234'"
+     </script>
+<!-- <script src="./define.js"></script> -->
+
+</body>
+</html>
